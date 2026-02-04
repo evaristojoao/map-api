@@ -19,14 +19,19 @@ def book_create_list_view(request):
         new_book.save()
 
         return JsonResponse({'id': new_book.id, 'name': new_book.name}, status=201)
-    
-    
+
+
 @csrf_exempt 
 def book_detail_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+
     if request.method == 'GET':
-        book = get_object_or_404(Book, pk=pk)
         data = {'id': book.id, 'name': book.name}
 
         return JsonResponse(data)
+    elif request.method == 'PUT':
+        data = json.loads(request.body.decode('utf-8'))
+        book.name = data['name']
+        book.save()
 
-
+        return JsonResponse({'id': book.id, 'name': book.name}, status=201)
