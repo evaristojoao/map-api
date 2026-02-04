@@ -33,5 +33,7 @@ def book_detail_view(request, pk):
         data = json.loads(request.body.decode('utf-8'))
         book.name = data['name']
         book.save()
+    elif request.method == 'DELETE':
+        book.delete()
 
-        return JsonResponse({'id': book.id, 'name': book.name}, status=201)
+        return JsonResponse({'message': 'Book deleted with success.'}, status=204)
