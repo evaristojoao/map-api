@@ -9,7 +9,7 @@ class Book(models.Model):
     city = models.CharField(max_length=100, db_index=True)
     travel_days = models.PositiveIntegerField(blank=True, null=True)
     value = models.DecimalField(max_digits=8, decimal_places=2)
-    file_url = models.URLField()
+    file_url = models.URLField(blank=True, null=True)
     cover_url = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     language = models.CharField(max_length=3, default="pt")
