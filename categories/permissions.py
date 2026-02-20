@@ -8,5 +8,8 @@ class CategoryPermissionClass(permissions.BasePermission):
 
         if request.method == 'POST':
             return request.user.has_perm('categories.add_category')
+        
+        if request.method in ['PATCH', 'PUT']:
+            return request.user.has_perm('categories.change_category')
 
         return False
