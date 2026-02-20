@@ -2,15 +2,15 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from categories.models import Category
 from categories.serializers import CategorySerializer
-
+from categories.permissions import CategoryPermissionClass
 
 class CategoryCreateListView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, CategoryPermissionClass,)
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
 class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, CategoryPermissionClass,)
     queryset = Category.objects.all()
     serializer_class = CategorySerializer

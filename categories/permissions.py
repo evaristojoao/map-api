@@ -1,0 +1,12 @@
+from rest_framework import permissions
+
+
+class CategoryPermissionClass(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in ['GET', 'OPTIONS', 'HEAD']:
+            return request.user.has_perm('categories.view_category')
+
+        if request.method == 'POST':
+            return request.user.has_perm('categories.add_category')
+
+        return False
