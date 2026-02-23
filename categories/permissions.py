@@ -11,5 +11,8 @@ class CategoryPermissionClass(permissions.BasePermission):
         
         if request.method in ['PATCH', 'PUT']:
             return request.user.has_perm('categories.change_category')
+        
+        if request.method == 'DELETE':
+            return request.user.has_perm('categories.delete_category')
 
         return False
