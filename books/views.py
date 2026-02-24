@@ -20,12 +20,12 @@ class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BookStatsView(views.APIView):
-    permission_classes = (IsAuthenticated, GlobalDefaultPermission,) # defino as permissões
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,) 
     queryset = Book.objects.all()
 
-    def get(self, request): # Action é o metodo GET
+    def get(self, request): 
         total_books = self.queryset.count()
-        books_by_categories = self.queryset.values('categories__name').annotate(count=Count('id')) # esta query traz o nome da categoria e a quantidade de categorias que tem
+        books_by_categories = self.queryset.values('categories__name').annotate(count=Count('id')) 
         total_reviews = Review.objects.count()
         average_stars = Review.objects.aggregate(avg_stars=Avg('stars'))['avg_stars']
 
@@ -33,7 +33,7 @@ class BookStatsView(views.APIView):
             'total_books': total_books,
             'books_by_categories': books_by_categories,
             'total_reviews': total_reviews,
-            'average_stars': round(average_stars, 1) if average_stars else 0, # recebo round average_stars caso exista average stars, senao recebo zero
+            'average_stars': round(average_stars, 1) if average_stars else 0, 
         },
         status=status.HTTP_200_OK)
 
