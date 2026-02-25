@@ -10,7 +10,7 @@ from reviews.models import Review
 class BookCreateListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Book.objects.all()
-    
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return BookListDetailSerializer
@@ -20,7 +20,7 @@ class BookCreateListView(generics.ListCreateAPIView):
 class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Book.objects.all()
-    
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return BookListDetailSerializer
