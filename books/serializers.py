@@ -13,7 +13,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = ['id', 'title', 'city', 'description', 'travel_days', 'categories', 'language', 'rate']
 
 
 class BookListDetailSerializer(serializers.ModelSerializer):

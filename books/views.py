@@ -20,7 +20,11 @@ class BookCreateListView(generics.ListCreateAPIView):
 class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Book.objects.all()
-    serializer_class = BookSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return BookListDetailSerializer
+        return BookSerializer
 
 
 class BookStatsView(views.APIView):
