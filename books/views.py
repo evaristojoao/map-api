@@ -3,14 +3,18 @@ from rest_framework import generics, views, response, status
 from rest_framework.permissions import IsAuthenticated
 from app.permissions import GlobalDefaultPermission
 from books.models import Book
-from books.serializers import BookSerializer
+from books.serializers import BookSerializer, BookListDetailSerializer
 from reviews.models import Review
 
 
 class BookCreateListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Book.objects.all()
-    serializer_class = BookSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return BookListDetailSerializer
+        return BookSerializer
 
 
 class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
