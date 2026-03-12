@@ -13,7 +13,16 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['id', 'title', 'city', 'description', 'travel_days', 'categories', 'language', 'rate']
+        fields = [
+            'id',
+            'title',
+            'city',
+            'description',
+            'travel_days',
+            'value',
+            'categories',
+            'language'
+        ]
 
 
 class BookListDetailSerializer(serializers.ModelSerializer):
@@ -29,4 +38,14 @@ class BookListDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['id', 'title', 'city', 'description', 'travel_days', 'categories', 'language', 'rate']
+        fields = [
+            'id',
+            'title',
+            'city',
+            'description',
+            'travel_days',
+            'value',
+            'categories',
+            'language',
+            'rate'
+        ]
